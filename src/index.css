@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Outfit", system-ui, -apple-system, sans-serif;
+  
+  --color-brand-orange: #ea580c;
+  --color-brand-orange-light: #f97316;
+  --color-brand-orange-dark: #c2410c;
+  --color-brand-charcoal: #121212;
+  --color-brand-charcoal-light: #1e1e1e;
+  --color-brand-brown: #2e1a0c;
+  --color-brand-white: #faf9f6;
+  --color-brand-white-pure: #ffffff;
+  --color-brand-beige: #f5f2eb;
+  --color-brand-gold: #d97706;
+  --color-brand-gold-soft: #f59e0b;
+}
+
+@layer utilities {
+  /* Trunk-inspired decorative curve styles */
+  .trunk-curve-left {
+    border-radius: 100% 0% 0% 100% / 50% 0% 0% 50%;
+  }
+  .trunk-curve-right {
+    border-radius: 0% 100% 100% 0% / 0% 50% 50% 0%;
+  }
+  .trunk-curve-bottom {
+    border-radius: 0% 0% 100% 100% / 0% 0% 100% 100%;
+  }
+  .trunk-curve-top {
+    border-radius: 100% 100% 0% 0% / 100% 100% 0% 0%;
+  }
+  
+  /* Custom scrollbar for premium aesthetic */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #121212;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #ea580c;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #f97316;
+  }
+}
+
+html, body {
+  background-color: #121212;
+  color: #faf9f6;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* Elegant selection colors */
+::selection {
+  background-color: rgba(234, 88, 12, 0.3);
+  color: #ffffff;
+}
