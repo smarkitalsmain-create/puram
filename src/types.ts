@@ -33,7 +33,6 @@ export interface ClientStory {
   solution: string;
   outcome: string;
   quote: string;
-  avatar: string;
 }
 
 export interface BlogPost {
@@ -48,6 +47,14 @@ export interface BlogPost {
   author: string;
 }
 
+export interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  image: string;
+  bio: string[];
+}
+
 export interface TimelineStep {
   label: string;
   description: string;
@@ -57,6 +64,7 @@ export interface TimelineStep {
 export interface ConsultationInput {
   name: string;
   email: string;
+  phone: string;
   company: string;
   eventType: string;
   date: string;

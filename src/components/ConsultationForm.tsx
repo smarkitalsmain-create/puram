@@ -1,7 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { ConsultationInput } from '../types';
 import { motion, AnimatePresence } from 'motion/react';
-import { Check, Calendar, ArrowRight, ArrowLeft, Loader2, Award, ClipboardCheck } from 'lucide-react';
+import { Check, Calendar, ArrowRight, ArrowLeft, Loader2, Award, MessageCircle, Mail } from 'lucide-react';
+
+const LEAD_WHATSAPP_NUMBER = '919810288146';
+const LEAD_EMAIL = 'smarkitals@gmail.com';
+
+function buildLeadMessage(formData: ConsultationInput): string {
+  return [
+    `New event consultation request`,
+    `Name: ${formData.name}`,
+    `Phone: ${formData.phone}`,
+    `Email: ${formData.email}`,
+    formData.company ? `Company: ${formData.company}` : null,
+    `Event Type: ${formData.eventType}`,
+    `Tentative Date: ${formData.date}`,
+    `Guest Count: ${formData.guestCount}`,
+    `Budget Range: ${formData.budgetRange}`,
+    formData.description ? `Details: ${formData.description}` : null
+  ].filter(Boolean).join('\n');
+}
 
 interface ConsultationFormProps {
   initialEventType?: string;
@@ -13,6 +31,7 @@ export default function ConsultationForm({ initialEventType = '', initialDescrip
   const [formData, setFormData] = useState<ConsultationInput>({
     name: '',
     email: '',
+    phone: '',
     company: '',
     eventType: initialEventType || 'Corporate Gala',
     date: '',
@@ -20,9 +39,10 @@ export default function ConsultationForm({ initialEventType = '', initialDescrip
     budgetRange: 'Exquisite $30k-$75k',
     description: initialDescription || ''
   });
-  
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [sentVia, setSentVia] = useState<'whatsapp' | 'email' | null>(null);
   const [pastSubmissions, setPastSubmissions] = useState<ConsultationInput[]>([]);
 
   // Keep eventType and description synced if props change
@@ -53,8 +73,8 @@ export default function ConsultationForm({ initialEventType = '', initialDescrip
   };
 
   const handleNext = () => {
-    if (step === 1 && (!formData.name || !formData.email)) {
-      alert('Please enter your name and email to proceed.');
+    if (step === 1 && (!formData.name || !formData.email || !formData.phone)) {
+      alert('Please enter your name, email and mobile number to proceed.');
       return;
     }
     if (step === 2 && !formData.date) {
@@ -68,18 +88,30 @@ export default function ConsultationForm({ initialEventType = '', initialDescrip
     setStep(prev => Math.max(prev - 1, 1));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (channel: 'whatsapp' | 'email') => {
+    if (!formData.name || !formData.email || !formData.phone || !formData.date) {
+      alert('Please complete your name, email, mobile number and tentative date first.');
+      return;
+    }
+
     setIsSubmitting(true);
-    
-    // Simulate premium agency review lag (1.5 seconds)
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
+
+    // Brief pause so the review state feels deliberate before handing off to WhatsApp/email
+    await new Promise(resolve => setTimeout(resolve, 600));
+
     const updatedHistory = [...pastSubmissions, formData];
     setPastSubmissions(updatedHistory);
     localStorage.setItem('puram_consultations', JSON.stringify(updatedHistory));
-    
+
+    const message = buildLeadMessage(formData);
+    if (channel === 'whatsapp') {
+      window.open(`https://wa.me/${LEAD_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+    } else {
+      window.location.href = `mailto:${LEAD_EMAIL}?subject=${encodeURIComponent(`New Event Consultation - ${formData.name}`)}&body=${encodeURIComponent(message)}`;
+    }
+
     setIsSubmitting(false);
+    setSentVia(channel);
     setIsSubmitted(true);
   };
 
@@ -87,6 +119,7 @@ export default function ConsultationForm({ initialEventType = '', initialDescrip
     setFormData({
       name: '',
       email: '',
+      phone: '',
       company: '',
       eventType: 'Corporate Gala',
       date: '',
@@ -95,6 +128,7 @@ export default function ConsultationForm({ initialEventType = '', initialDescrip
       description: ''
     });
     setIsSubmitted(false);
+    setSentVia(null);
     setStep(1);
   };
 
@@ -112,7 +146,7 @@ export default function ConsultationForm({ initialEventType = '', initialDescrip
 
       {/* Main Booking Wizard */}
       {!isSubmitted ? (
-        <form onSubmit={handleSubmit} className="space-y-8">
+        <div className="space-y-8">
           {/* Progress Indicator */}
           <div className="space-y-4">
             <div className="flex justify-between items-center text-xs tracking-widest uppercase font-semibold text-brand-white/40">
@@ -186,18 +220,35 @@ export default function ConsultationForm({ initialEventType = '', initialDescrip
                     </div>
                   </div>
 
-                  <div className="space-y-2">
-                    <label className="block text-xs font-semibold tracking-widest text-brand-white/60 uppercase">
-                      Company / Organization (Optional)
-                    </label>
-                    <input
-                      type="text"
-                      name="company"
-                      value={formData.company}
-                      onChange={handleInputChange}
-                      placeholder="e.g. Luminary Global Tech"
-                      className="w-full px-5 py-3.5 rounded-xl bg-brand-charcoal border border-brand-white/10 focus:border-brand-orange-light text-brand-white text-sm outline-none transition-all placeholder:text-brand-white/20"
-                    />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="block text-xs font-semibold tracking-widest text-brand-white/60 uppercase">
+                        Mobile Number *
+                      </label>
+                      <input
+                        type="tel"
+                        name="phone"
+                        required
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        placeholder="e.g. +91 98765 43210"
+                        className="w-full px-5 py-3.5 rounded-xl bg-brand-charcoal border border-brand-white/10 focus:border-brand-orange-light text-brand-white text-sm outline-none transition-all placeholder:text-brand-white/20"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="block text-xs font-semibold tracking-widest text-brand-white/60 uppercase">
+                        Company / Organization (Optional)
+                      </label>
+                      <input
+                        type="text"
+                        name="company"
+                        value={formData.company}
+                        onChange={handleInputChange}
+                        placeholder="e.g. Luminary Global Tech"
+                        className="w-full px-5 py-3.5 rounded-xl bg-brand-charcoal border border-brand-white/10 focus:border-brand-orange-light text-brand-white text-sm outline-none transition-all placeholder:text-brand-white/20"
+                      />
+                    </div>
                   </div>
                 </motion.div>
               )}
@@ -326,6 +377,10 @@ export default function ConsultationForm({ initialEventType = '', initialDescrip
                       <span className="block text-[10px] text-brand-white/40 uppercase tracking-widest">Contact Email</span>
                       <strong className="text-brand-white font-medium mt-1 block">{formData.email}</strong>
                     </div>
+                    <div>
+                      <span className="block text-[10px] text-brand-white/40 uppercase tracking-widest">Mobile Number</span>
+                      <strong className="text-brand-white font-medium mt-1 block">{formData.phone}</strong>
+                    </div>
                     {formData.company && (
                       <div className="col-span-2">
                         <span className="block text-[10px] text-brand-white/40 uppercase tracking-widest">Organization</span>
@@ -391,26 +446,38 @@ export default function ConsultationForm({ initialEventType = '', initialDescrip
                 Next Step <ArrowRight size={13} />
               </button>
             ) : (
-              <button
-                type="submit"
-                id="booking-submit-btn"
-                disabled={isSubmitting}
-                className="flex items-center gap-2 px-7 py-3.5 bg-brand-orange hover:bg-brand-orange-dark text-brand-white text-xs font-semibold uppercase tracking-widest rounded-xl transition-all ml-auto disabled:opacity-55 cursor-pointer shadow-lg shadow-brand-orange/15"
-              >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 size={13} className="animate-spin" />
-                    Reviewing Brief...
-                  </>
-                ) : (
-                  <>
-                    Commission Blueprint <ClipboardCheck size={13} />
-                  </>
-                )}
-              </button>
+              <div className="flex flex-col sm:flex-row gap-3 ml-auto">
+                <button
+                  type="button"
+                  id="booking-submit-email-btn"
+                  disabled={isSubmitting}
+                  onClick={() => handleSubmit('email')}
+                  className="flex items-center justify-center gap-2 px-6 py-3.5 bg-transparent border border-brand-white/15 hover:border-brand-orange-light text-brand-white text-xs font-semibold uppercase tracking-widest rounded-xl transition-all disabled:opacity-55 cursor-pointer"
+                >
+                  <Mail size={14} /> Send via Email
+                </button>
+                <button
+                  type="button"
+                  id="booking-submit-whatsapp-btn"
+                  disabled={isSubmitting}
+                  onClick={() => handleSubmit('whatsapp')}
+                  className="flex items-center justify-center gap-2 px-7 py-3.5 bg-brand-orange hover:bg-brand-orange-dark text-brand-white text-xs font-semibold uppercase tracking-widest rounded-xl transition-all disabled:opacity-55 cursor-pointer shadow-lg shadow-brand-orange/15"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 size={13} className="animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <MessageCircle size={14} /> Send via WhatsApp
+                    </>
+                  )}
+                </button>
+              </div>
             )}
           </div>
-        </form>
+        </div>
       ) : (
         /* SUCCESS RECEIPT ANIMATED PANEL */
         <motion.div
@@ -430,7 +497,9 @@ export default function ConsultationForm({ initialEventType = '', initialDescrip
               Blueprint Commissioned
             </h2>
             <p className="font-sans text-xs text-brand-white/65 max-w-md mx-auto leading-relaxed">
-              Thank you, <span className="text-brand-white font-medium">{formData.name}</span>. Our art curators and logistics directors have received your brief. We will email you with a bespoke mood board proposal within 24 hours.
+              Thank you, <span className="text-brand-white font-medium">{formData.name}</span>. {sentVia === 'whatsapp'
+                ? 'We\'ve opened WhatsApp with your brief pre-filled — just hit send and our team will reply shortly.'
+                : 'We\'ve opened your email app with your brief pre-filled — just hit send and our team will reply shortly.'}
             </p>
           </div>
 

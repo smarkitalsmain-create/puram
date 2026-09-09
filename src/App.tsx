@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
-import ElephantLogo from './components/ElephantLogo';
 import ServiceCard from './components/ServiceCard';
 import PortfolioGrid from './components/PortfolioGrid';
 import ConsultationForm from './components/ConsultationForm';
 import EventModeler from './components/EventModeler';
-import { SERVICES, PROJECTS, CLIENT_STORIES, BLOG_POSTS, TIMELINE_STEPS } from './data';
+import { SERVICES, PROJECTS, CLIENT_STORIES, BLOG_POSTS, TIMELINE_STEPS, LEADERSHIP } from './data';
 import { BlogPost, ClientStory, Service } from './types';
 import { motion, AnimatePresence } from 'motion/react';
-import { 
-  Building2, Heart, Sparkles, Cpu, Users, ArrowRight, ArrowUpRight, 
-  MapPin, Phone, Mail, Clock, MessageSquare, ShieldAlert, Check,
-  ChevronRight, CalendarRange, Award, Info, BookOpen, X
+import {
+  Building2, Heart, Sparkles, Cpu, Users, ArrowRight, ArrowUpRight,
+  Phone, Mail, Instagram, MessageSquare, ShieldAlert, Check,
+  ChevronRight, CalendarRange, Info, BookOpen, X
 } from 'lucide-react';
 
 export default function App() {
@@ -115,7 +114,7 @@ export default function App() {
       <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
 
       {/* Master View Router Router */}
-      <main className="pt-20">
+      <main className="pt-24">
         <AnimatePresence mode="wait">
           
           {/* 1. HOME VIEW */}
@@ -130,10 +129,10 @@ export default function App() {
             >
               {/* Dynamic Cinematic Hero */}
               <section className="relative min-h-[90vh] flex items-center justify-center px-6 text-center overflow-hidden">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-charcoal-light/40 via-brand-charcoal to-brand-charcoal" />
-                
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_#FFF4E6_0%,_#FFF4E6_55%,_#F8E5CD_100%)]" />
+
                 {/* Visual texture layer */}
-                <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(#ffffff_1px,_transparent_1px)] [background-size:16px_16px] pointer-events-none" />
+                <div className="absolute inset-0 opacity-[0.035] bg-[radial-gradient(#24130A_1px,_transparent_1px)] [background-size:16px_16px] pointer-events-none" />
 
                 <div className="max-w-4xl mx-auto space-y-10 relative z-10">
                   {/* Subtle curved line top frame */}
@@ -143,28 +142,32 @@ export default function App() {
                     transition={{ duration: 0.8 }}
                     className="flex flex-col items-center gap-1"
                   >
-                    <ElephantLogo size={110} mode="full" variant="orange" className="mb-4" />
-                    <span className="font-sans text-[10px] tracking-[0.3em] text-brand-orange-light uppercase font-black bg-brand-orange/10 px-4 py-1.5 rounded-full border border-brand-orange/20 mt-2">
+                    <img
+                      src="/logo/puram-full-logo.png"
+                      alt="Puram Events"
+                      className="w-[270px] sm:w-[355px] h-auto object-contain mb-4"
+                    />
+                    <span className="font-sans text-[10px] tracking-[0.3em] text-brand-orange-dark uppercase font-black bg-brand-orange/10 px-4 py-1.5 rounded-full border border-brand-orange/25 mt-2">
                       Puram Signature Experience
                     </span>
                   </motion.div>
 
-                  <motion.h1 
+                  <motion.h1
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="font-display font-black text-4xl sm:text-6xl md:text-7xl text-brand-white leading-[1.05] tracking-tight uppercase"
+                    className="font-display font-black text-4xl sm:text-6xl md:text-7xl text-dark-heading leading-[1.05] tracking-tight uppercase"
                   >
                     Every Event Has <br className="hidden sm:inline"/>
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange-light via-brand-orange to-brand-gold">A Story.</span> <br />
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange-dark via-brand-orange to-brand-orange-light">A Story.</span> <br />
                     We Make It Extraordinary.
                   </motion.h1>
 
-                  <motion.p 
+                  <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
-                    className="font-sans text-xs sm:text-sm text-brand-white/70 max-w-2xl mx-auto leading-relaxed"
+                    className="font-sans text-xs sm:text-sm text-dark-body max-w-2xl mx-auto leading-relaxed"
                   >
                     From intimate milestone celebrations to grand, high-profile corporate productions, Puram Events transforms ideas into unforgettable experiences through thoughtful design, flawless engineering, and complete client peace of mind.
                   </motion.p>
@@ -188,7 +191,7 @@ export default function App() {
                     <button
                       id="hero-secondary-cta"
                       onClick={() => setActiveTab('portfolio')}
-                      className="w-full sm:w-auto px-8 py-4 bg-transparent hover:bg-brand-white/5 border border-brand-white/10 hover:border-brand-white text-brand-white font-display text-xs font-bold uppercase tracking-widest rounded-full transition-all duration-300 cursor-pointer"
+                      className="w-full sm:w-auto px-8 py-4 bg-transparent hover:bg-dark-heading/5 border border-dark-heading/20 hover:border-dark-heading text-dark-heading font-display text-xs font-bold uppercase tracking-widest rounded-full transition-all duration-300 cursor-pointer"
                     >
                       View Our Work
                     </button>
@@ -444,11 +447,9 @@ export default function App() {
                     >
                       <div className="space-y-4">
                         <div className="flex items-center gap-4">
-                          <img
-                            src={story.avatar}
-                            alt={story.clientName}
-                            className="w-12 h-12 rounded-full object-cover border border-brand-orange/30"
-                          />
+                          <div className="w-12 h-12 shrink-0 rounded-full bg-brand-orange/10 border border-brand-orange/30 flex items-center justify-center font-display font-black text-brand-orange-light text-sm">
+                            {story.clientName.charAt(0)}
+                          </div>
                           <div>
                             <h4 className="font-display font-bold text-xs text-brand-white">
                               {story.clientName}
@@ -554,31 +555,16 @@ export default function App() {
               <div className="w-full h-px bg-brand-white/5" />
 
               {/* Majestic Curve Frame block */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-                <div className="space-y-6">
-                  <h2 className="font-display font-black text-2xl text-brand-white uppercase">
-                    Every event begins with an emotion.
-                  </h2>
-                  <p className="font-sans text-xs text-brand-white/70 leading-relaxed">
-                    At Puram Events, we do not view ourselves merely as coordinators. We are designers, architects, and storytellers. We believe that a gathering is a physical manifestation of a brand's pride, a family's love, or an industry's path.
-                  </p>
-                  <p className="font-sans text-xs text-brand-white/70 leading-relaxed">
-                    By structuring your schedule, selecting the correct acoustic balance, drafting beautiful visual concepts, and removing every operational friction, we ensure that you are fully present to witness your vision come to life.
-                  </p>
-                </div>
-                <div className="relative rounded-2xl overflow-hidden h-72 border border-brand-white/10">
-                  <img
-                    src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=1200"
-                    alt="Creative Direction Team planning session"
-                    className="w-full h-full object-cover opacity-60"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-brand-charcoal via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-4">
-                    <span className="text-[10px] tracking-widest text-brand-orange-light font-bold uppercase bg-brand-charcoal/80 px-3 py-1 rounded border border-brand-white/5">
-                      Puram HQ Design Studio
-                    </span>
-                  </div>
-                </div>
+              <div className="max-w-2xl mx-auto text-center space-y-6">
+                <h2 className="font-display font-black text-2xl text-brand-white uppercase">
+                  Every event begins with an emotion.
+                </h2>
+                <p className="font-sans text-xs text-brand-white/70 leading-relaxed">
+                  At Puram Events, we do not view ourselves merely as coordinators. We are designers, architects, and storytellers. We believe that a gathering is a physical manifestation of a brand's pride, a family's love, or an industry's path.
+                </p>
+                <p className="font-sans text-xs text-brand-white/70 leading-relaxed">
+                  By structuring your schedule, selecting the correct acoustic balance, drafting beautiful visual concepts, and removing every operational friction, we ensure that you are fully present to witness your vision come to life.
+                </p>
               </div>
 
               {/* Core Values Section (Elephant Symbolism) */}
@@ -624,6 +610,83 @@ export default function App() {
                   className="px-6 py-3 bg-brand-orange hover:bg-brand-orange-dark text-brand-white font-sans text-xs font-semibold uppercase tracking-widest rounded-xl transition-colors cursor-pointer"
                 >
                   Explore Our Services
+                </button>
+              </div>
+            </motion.div>
+          )}
+
+          {/* 2b. LEADERSHIP VIEW */}
+          {activeTab === 'team' && (
+            <motion.div
+              key="team-tab"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.4 }}
+              className="max-w-5xl mx-auto px-6 py-16 space-y-20 pb-24"
+            >
+              {/* Editorial Header */}
+              <div className="space-y-4 text-center">
+                <span className="font-display font-bold text-xs uppercase tracking-widest text-brand-orange-light">
+                  Who We Are
+                </span>
+                <h1 className="font-display font-black text-4xl sm:text-5xl text-brand-white uppercase tracking-tight">
+                  Leadership
+                </h1>
+                <p className="font-sans text-xs text-brand-white/50 max-w-lg mx-auto">
+                  The two founders behind every Puram experience — one shaping how it feels, the other how it looks and moves.
+                </p>
+              </div>
+
+              <div className="w-full h-px bg-brand-white/5" />
+
+              {/* Founder Profiles */}
+              <div className="space-y-16">
+                {LEADERSHIP.map((member, index) => (
+                  <div
+                    key={member.id}
+                    id={`team-member-${member.id}`}
+                    className={`grid grid-cols-1 md:grid-cols-5 gap-10 items-start ${
+                      index % 2 === 1 ? 'md:[direction:rtl]' : ''
+                    }`}
+                  >
+                    <div className="md:col-span-2 [direction:ltr]">
+                      <div className="relative rounded-2xl overflow-hidden aspect-[3/4] border border-brand-white/10">
+                        <img
+                          src={member.image}
+                          alt={member.name}
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-brand-charcoal/70 via-transparent to-transparent" />
+                      </div>
+                    </div>
+                    <div className="md:col-span-3 [direction:ltr] space-y-4 pt-2">
+                      <div>
+                        <h2 className="font-display font-black text-2xl text-brand-white uppercase tracking-tight">
+                          {member.name}
+                        </h2>
+                        <span className="font-sans text-[11px] tracking-widest text-brand-orange-light uppercase font-bold">
+                          {member.role}
+                        </span>
+                      </div>
+                      {member.bio.map((paragraph, i) => (
+                        <p key={i} className="font-sans text-xs text-brand-white/70 leading-relaxed">
+                          {paragraph}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Action */}
+              <div className="text-center pt-4">
+                <button
+                  id="team-cta-btn"
+                  onClick={() => setActiveTab('consultation')}
+                  className="px-6 py-3 bg-brand-orange hover:bg-brand-orange-dark text-brand-white font-sans text-xs font-semibold uppercase tracking-widest rounded-xl transition-colors cursor-pointer"
+                >
+                  Start Planning With Us
                 </button>
               </div>
             </motion.div>
@@ -696,13 +759,13 @@ export default function App() {
             >
               <div className="space-y-4 text-center max-w-xl mx-auto">
                 <span className="font-display font-bold text-xs uppercase tracking-widest text-brand-orange-light">
-                  Case Studies
+                  Our Work
                 </span>
                 <h1 className="font-display font-black text-4xl text-brand-white uppercase tracking-tight">
-                  Landmark Productions
+                  Events We've Delivered
                 </h1>
                 <p className="font-sans text-xs text-brand-white/50">
-                  Explore how we applied creative strategies, spatial engineering, and absolute logistical execution to deliver high-profile experiences.
+                  A look at real events we've styled and produced — from theatre festivals to intimate family celebrations.
                 </p>
               </div>
 
@@ -875,137 +938,77 @@ export default function App() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                {/* 1. Office Info & Social Connections */}
-                <div className="space-y-8">
-                  <div className="p-6 bg-brand-charcoal-light border border-brand-white/5 rounded-2xl space-y-5">
-                    <h3 className="font-display font-black text-base text-brand-white uppercase">
-                      Puram Creative Studio
-                    </h3>
+              <div className="max-w-xl mx-auto space-y-8">
+                {/* Office Info & Social Connections */}
+                <div className="p-6 bg-brand-charcoal-light border border-brand-white/5 rounded-2xl space-y-5">
+                  <h3 className="font-display font-black text-base text-brand-white uppercase">
+                    Get In Touch
+                  </h3>
 
-                    <div className="space-y-4 text-xs font-sans">
-                      <div className="flex items-start gap-3 text-brand-white/70">
-                        <MapPin size={16} className="text-brand-orange-light shrink-0 mt-0.5" />
-                        <div>
-                          <strong>Headquarters Address</strong>
-                          <p className="mt-1 leading-relaxed">
-                            Aurelia Block, Level 4, Bandra Kurla Complex,<br />
-                            Mumbai, Maharashtra 400051, India
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start gap-3 text-brand-white/70">
-                        <Clock size={16} className="text-brand-orange-light shrink-0 mt-0.5" />
-                        <div>
-                          <strong>Studio Hours</strong>
-                          <p className="mt-1">
-                            Monday - Friday: 10:00 AM - 6:30 PM<br />
-                            Saturdays: By Private Appointment Only
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start gap-3 text-brand-white/70">
-                        <Mail size={16} className="text-brand-orange-light shrink-0 mt-0.5" />
-                        <div>
-                          <strong>General Correspondence</strong>
-                          <p className="mt-1">
-                            curator@puramevents.com
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start gap-3 text-brand-white/70">
-                        <Phone size={16} className="text-brand-orange-light shrink-0 mt-0.5" />
-                        <div>
-                          <strong>Concierge Hotline</strong>
-                          <p className="mt-1">
-                            +91 22 4902 5500
-                          </p>
-                        </div>
+                  <div className="space-y-4 text-xs font-sans">
+                    <div className="flex items-start gap-3 text-brand-white/70">
+                      <Mail size={16} className="text-brand-orange-light shrink-0 mt-0.5" />
+                      <div>
+                        <strong>Email</strong>
+                        <p className="mt-1">
+                          <a href="mailto:hello@puramevents.com" className="hover:text-brand-orange-light transition-colors">hello@puramevents.com</a>
+                        </p>
                       </div>
                     </div>
-                  </div>
 
-                  {/* WhatsApp, Email, Instagram Rails */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <a
-                      href="https://wa.me/#"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-4 rounded-xl bg-green-500/10 hover:bg-green-500/20 border border-green-500/20 hover:border-green-500/40 text-center space-y-1 block transition-all"
-                    >
-                      <strong className="text-xs text-green-400 block font-bold uppercase tracking-wider">WhatsApp</strong>
-                      <span className="text-[10px] text-brand-white/60">Live Planners Chat</span>
-                    </a>
-                    
-                    <a
-                      href="mailto:curator@puramevents.com"
-                      className="p-4 rounded-xl bg-brand-orange/10 hover:bg-brand-orange/20 border border-brand-orange/20 hover:border-brand-orange/40 text-center space-y-1 block transition-all"
-                    >
-                      <strong className="text-xs text-brand-orange-light block font-bold uppercase tracking-wider">Direct Email</strong>
-                      <span className="text-[10px] text-brand-white/60">curator@puram.com</span>
-                    </a>
+                    <div className="flex items-start gap-3 text-brand-white/70">
+                      <Phone size={16} className="text-brand-orange-light shrink-0 mt-0.5" />
+                      <div>
+                        <strong>Call Us</strong>
+                        <p className="mt-1">
+                          <a href="tel:+919810288146" className="hover:text-brand-orange-light transition-colors">+91 98102 88146</a>
+                          {' · '}
+                          <a href="tel:+919910516083" className="hover:text-brand-orange-light transition-colors">+91 99105 16083</a>
+                        </p>
+                      </div>
+                    </div>
 
-                    <a
-                      href="https://instagram.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-4 rounded-xl bg-pink-500/10 hover:bg-pink-500/20 border border-pink-500/20 hover:border-pink-500/40 text-center space-y-1 block transition-all"
-                    >
-                      <strong className="text-xs text-pink-400 block font-bold uppercase tracking-wider">Instagram</strong>
-                      <span className="text-[10px] text-brand-white/60">@puramevents</span>
-                    </a>
+                    <div className="flex items-start gap-3 text-brand-white/70">
+                      <Instagram size={16} className="text-brand-orange-light shrink-0 mt-0.5" />
+                      <div>
+                        <strong>Instagram</strong>
+                        <p className="mt-1">
+                          <a href="https://instagram.com/puram_events" target="_blank" rel="noopener noreferrer" className="hover:text-brand-orange-light transition-colors">@puram_events</a>
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                {/* 2. Interactive Map representation (Custom styled geometric Blueprint SVG map) */}
-                <div className="rounded-2xl border border-brand-white/10 bg-brand-charcoal-light overflow-hidden p-6 relative flex flex-col justify-between min-h-[360px]">
-                  {/* Decorative Blueprint SVG Grid Background */}
-                  <div className="absolute inset-0 bg-grid opacity-10 pointer-events-none" />
-                  
-                  <div className="relative z-10 space-y-3">
-                    <span className="px-2.5 py-1 bg-brand-orange/15 border border-brand-orange/30 text-brand-orange-light text-[9px] font-bold uppercase tracking-wider rounded">
-                      Studio Blueprint Map
-                    </span>
-                    <h3 className="font-display font-black text-lg text-brand-white uppercase">
-                      Bandra Kurla Complex (BKC) Location
-                    </h3>
-                    <p className="font-sans text-xs text-brand-white/60">
-                      Our custom-crafted vector locator shows our precise position near Dhirubhai Ambani Square. Perfect for pre-production consultation meetups.
-                    </p>
-                  </div>
+                {/* WhatsApp, Email, Instagram Rails */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <a
+                    href="https://wa.me/919810288146"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-4 rounded-xl bg-green-500/10 hover:bg-green-500/20 border border-green-500/20 hover:border-green-500/40 text-center space-y-1 block transition-all"
+                  >
+                    <strong className="text-xs text-green-400 block font-bold uppercase tracking-wider">WhatsApp</strong>
+                    <span className="text-[10px] text-brand-white/60">+91 98102 88146</span>
+                  </a>
 
-                  {/* Elegant Geometric Vector Map illustration (Creative layout) */}
-                  <div className="w-full h-44 border border-brand-white/5 rounded-xl bg-brand-charcoal flex items-center justify-center overflow-hidden relative">
-                    {/* SVG Vector roads and rivers */}
-                    <svg viewBox="0 0 400 150" className="absolute inset-0 w-full h-full opacity-35">
-                      {/* BKC roads */}
-                      <path d="M 0 40 Q 150 40 400 110" stroke="#faf9f6" strokeWidth="2" fill="none" strokeDasharray="3 3" />
-                      <path d="M 120 0 L 120 150" stroke="#faf9f6" strokeWidth="1" fill="none" />
-                      <path d="M 280 0 L 280 150" stroke="#faf9f6" strokeWidth="1.5" fill="none" />
-                      {/* Trunk curves river representing memory */}
-                      <path d="M 0 100 Q 180 80 400 130" stroke="#ea580c" strokeWidth="3" fill="none" opacity="0.4" />
-                      {/* Compass dial */}
-                      <circle cx="50" cy="110" r="15" stroke="#ea580c" strokeWidth="0.5" fill="none" />
-                      <line x1="50" y1="95" x2="50" y2="125" stroke="#ea580c" strokeWidth="0.5" />
-                    </svg>
+                  <a
+                    href="mailto:hello@puramevents.com"
+                    className="p-4 rounded-xl bg-brand-orange/10 hover:bg-brand-orange/20 border border-brand-orange/20 hover:border-brand-orange/40 text-center space-y-1 block transition-all"
+                  >
+                    <strong className="text-xs text-brand-orange-light block font-bold uppercase tracking-wider">Direct Email</strong>
+                    <span className="text-[10px] text-brand-white/60">hello@puramevents.com</span>
+                  </a>
 
-                    {/* Glowing Marker */}
-                    <div className="relative z-10 flex flex-col items-center gap-1.5 animate-bounce">
-                      <div className="w-8 h-8 rounded-full bg-brand-orange border border-brand-white flex items-center justify-center text-brand-white shadow-xl">
-                        <Award size={14} />
-                      </div>
-                      <span className="px-2 py-0.5 bg-brand-charcoal text-[9px] font-bold uppercase tracking-widest text-brand-white border border-brand-white/10 rounded">
-                        Puram Events
-                      </span>
-                    </div>
-                  </div>
-
-                  <p className="font-sans text-[10px] text-brand-white/40 text-center relative z-10 pt-2">
-                    Security gate verification is required at Aurelia Block reception lobby.
-                  </p>
+                  <a
+                    href="https://instagram.com/puram_events"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-4 rounded-xl bg-pink-500/10 hover:bg-pink-500/20 border border-pink-500/20 hover:border-pink-500/40 text-center space-y-1 block transition-all"
+                  >
+                    <strong className="text-xs text-pink-400 block font-bold uppercase tracking-wider">Instagram</strong>
+                    <span className="text-[10px] text-brand-white/60">@puram_events</span>
+                  </a>
                 </div>
               </div>
             </motion.div>
@@ -1047,14 +1050,15 @@ export default function App() {
           {/* Col 1: Brand details */}
           <div className="space-y-5">
             <div className="flex items-center">
-              <ElephantLogo size={42} mode="full" variant="orange" holeColor="#1e1e1e" />
+              <img
+                src="/logo/puram-full-logo.png"
+                alt="Puram Events"
+                className="w-[195px] sm:w-[230px] h-auto object-contain"
+              />
             </div>
-            <p className="font-sans text-[11px] text-brand-white/50 leading-relaxed">
-              An award-winning event design & event management company dedicated to removing every operational hassle while creating landmark experiences that live in memory forever.
-            </p>
             <div className="font-sans text-[10px] text-brand-white/40 flex items-center gap-1">
               <ShieldAlert size={12} className="text-brand-orange-light" />
-              <span>Bandra Kurla Complex, Mumbai, India</span>
+              <span>hello@puramevents.com</span>
             </div>
           </div>
 
@@ -1066,8 +1070,9 @@ export default function App() {
             <div className="flex flex-col gap-2 text-xs font-sans text-brand-white/60">
               <button onClick={() => { setActiveTab('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-brand-orange-light text-left cursor-pointer">Home Canvas</button>
               <button onClick={() => { setActiveTab('about'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-brand-orange-light text-left cursor-pointer">Our Philosophy</button>
+              <button onClick={() => { setActiveTab('team'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-brand-orange-light text-left cursor-pointer">Leadership</button>
               <button onClick={() => { setActiveTab('services'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-brand-orange-light text-left cursor-pointer">Event Disciplines</button>
-              <button onClick={() => { setActiveTab('portfolio'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-brand-orange-light text-left cursor-pointer">Landmark Portfolio</button>
+              <button onClick={() => { setActiveTab('portfolio'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-brand-orange-light text-left cursor-pointer">Events We've Delivered</button>
               <button onClick={() => { setActiveTab('blog'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-brand-orange-light text-left cursor-pointer">Editorial Journal</button>
               <button onClick={() => { setActiveTab('contact'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-brand-orange-light text-left cursor-pointer">Contact Studio</button>
             </div>
@@ -1093,7 +1098,7 @@ export default function App() {
               The Journal Newsletter
             </h4>
             <p className="font-sans text-[11px] text-brand-white/50 leading-relaxed">
-              Subscribe to receive our seasonal case study reports, spatial design trends, and Udaipur vendor checklists.
+              Subscribe to receive our seasonal case study reports, spatial design trends, and event planning checklists.
             </p>
 
             {/* Newsletter input */}
@@ -1126,7 +1131,7 @@ export default function App() {
 
         {/* Legal bar and copyright */}
         <div className="max-w-7xl mx-auto pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-sans text-brand-white/40">
-          <p>© 2026 Puram Events Private Limited. Crafting Unforgettable Experiences.</p>
+          <p>© 2026 Puram Events. Crafting Unforgettable Experiences.</p>
           <div className="flex gap-4">
             <button
               id="privacy-policy-link"

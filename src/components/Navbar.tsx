@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import ElephantLogo from './ElephantLogo';
 import { Menu, X, Calendar } from 'lucide-react';
 
 interface NavbarProps {
@@ -13,6 +12,7 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
   const navItems = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'Our Philosophy' },
+    { id: 'team', label: 'Leadership' },
     { id: 'services', label: 'Services' },
     { id: 'portfolio', label: 'Portfolio' },
     { id: 'blog', label: 'Journal' },
@@ -26,15 +26,19 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-brand-charcoal/80 backdrop-blur-xl border-b border-brand-white/5">
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-hero-bg/90 backdrop-blur-xl border-b border-dark-heading/10 shadow-sm shadow-dark-heading/5">
+      <div className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
         {/* Brand Logo & Name */}
         <button
           id="nav-logo-btn"
           onClick={() => handleNavClick('home')}
           className="flex items-center cursor-pointer group text-left"
         >
-          <ElephantLogo size={48} mode="full" variant="orange" className="group-hover:scale-[1.03]" />
+          <img
+            src="/logo/puram-full-logo.png"
+            alt="Puram Events"
+            className="w-[112px] sm:w-[136px] h-auto object-contain group-hover:scale-[1.03] transition-transform duration-300"
+          />
         </button>
 
         {/* Desktop Navigation */}
@@ -47,12 +51,12 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
                 id={`nav-item-${item.id}`}
                 onClick={() => handleNavClick(item.id)}
                 className={`font-sans text-xs tracking-widest uppercase cursor-pointer transition-all duration-300 relative py-2 ${
-                  isActive ? 'text-brand-orange-light font-medium' : 'text-brand-white/70 hover:text-brand-white'
+                  isActive ? 'text-brand-orange-dark font-medium' : 'text-dark-body hover:text-dark-heading'
                 }`}
               >
                 {item.label}
                 {isActive && (
-                  <span className="absolute bottom-0 left-0 w-full h-[1.5px] bg-brand-orange-light trunk-curve-bottom animate-pulse" />
+                  <span className="absolute bottom-0 left-0 w-full h-[1.5px] bg-brand-orange-dark trunk-curve-bottom animate-pulse" />
                 )}
               </button>
             );
@@ -66,8 +70,8 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
             onClick={() => handleNavClick('consultation')}
             className={`flex items-center gap-2 px-5 py-2.5 rounded-full font-sans text-xs font-semibold uppercase tracking-widest transition-all duration-300 border cursor-pointer ${
               activeTab === 'consultation'
-                ? 'bg-brand-orange text-brand-white border-brand-orange'
-                : 'bg-transparent text-brand-white border-brand-orange-light/40 hover:border-brand-orange-light hover:bg-brand-orange/10'
+                ? 'bg-brand-orange text-brand-white-pure border-brand-orange'
+                : 'bg-transparent text-dark-heading border-brand-orange-dark/40 hover:border-brand-orange-dark hover:bg-brand-orange/10'
             }`}
           >
             <Calendar size={13} />
@@ -80,7 +84,7 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
           <button
             id="mobile-menu-toggle"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="text-brand-white hover:text-brand-orange-light p-2 transition-colors cursor-pointer"
+            className="text-dark-heading hover:text-brand-orange-dark p-2 transition-colors cursor-pointer"
             aria-label="Toggle Menu"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -90,7 +94,7 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
 
       {/* Mobile Menu Panel */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-brand-charcoal/95 border-b border-brand-white/5 animate-fade-in py-6 px-6 flex flex-col gap-5">
+        <div className="md:hidden bg-hero-bg/95 border-b border-dark-heading/10 animate-fade-in py-6 px-6 flex flex-col gap-5">
           {navItems.map((item) => {
             const isActive = activeTab === item.id;
             return (
@@ -98,8 +102,8 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
                 key={item.id}
                 id={`mobile-nav-item-${item.id}`}
                 onClick={() => handleNavClick(item.id)}
-                className={`text-left font-display text-base tracking-wider uppercase py-2 border-b border-brand-white/5 ${
-                  isActive ? 'text-brand-orange-light font-semibold' : 'text-brand-white/80'
+                className={`text-left font-display text-base tracking-wider uppercase py-2 border-b border-dark-heading/10 ${
+                  isActive ? 'text-brand-orange-dark font-semibold' : 'text-dark-body'
                 }`}
               >
                 {item.label}

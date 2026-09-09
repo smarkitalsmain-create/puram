@@ -5,17 +5,25 @@
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
   --font-display: "Outfit", system-ui, -apple-system, sans-serif;
   
-  --color-brand-orange: #ea580c;
-  --color-brand-orange-light: #f97316;
-  --color-brand-orange-dark: #c2410c;
-  --color-brand-charcoal: #121212;
-  --color-brand-charcoal-light: #1e1e1e;
-  --color-brand-brown: #2e1a0c;
-  --color-brand-white: #faf9f6;
+  /* Core brand palette (site-wide dark theme) */
+  --color-brand-orange: #F47A0B;
+  --color-brand-orange-light: #FFB31A;
+  --color-brand-orange-dark: #D95F05;
+  --color-brand-charcoal: #120D09;
+  --color-brand-charcoal-light: #1B120C;
+  --color-brand-card: #241811;
+  --color-brand-brown: #3d1a04;
+  --color-brand-white: #FFF8EE;
   --color-brand-white-pure: #ffffff;
   --color-brand-beige: #f5f2eb;
-  --color-brand-gold: #d97706;
-  --color-brand-gold-soft: #f59e0b;
+  --color-brand-gold: #FFB31A;
+  --color-brand-gold-soft: #E8A21A;
+
+  /* Light warm palette (navbar + hero only) */
+  --color-hero-bg: #FFF4E6;
+  --color-hero-bg-secondary: #F8E5CD;
+  --color-dark-heading: #24130A;
+  --color-dark-body: #624A3A;
 }
 
 @layer utilities {
@@ -39,20 +47,20 @@
     height: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #121212;
+    background: #120D09;
   }
   ::-webkit-scrollbar-thumb {
-    background: #ea580c;
+    background: #F47A0B;
     border-radius: 3px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #f97316;
+    background: #FFB31A;
   }
 }
 
 html, body {
-  background-color: #121212;
-  color: #faf9f6;
+  background-color: #120D09;
+  color: #FFF8EE;
   font-family: var(--font-sans);
   overflow-x: hidden;
   scroll-behavior: smooth;
@@ -60,6 +68,6 @@ html, body {
 
 /* Elegant selection colors */
 ::selection {
-  background-color: rgba(234, 88, 12, 0.3);
+  background-color: rgba(244, 122, 11, 0.3);
   color: #ffffff;
 }

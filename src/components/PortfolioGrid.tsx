@@ -13,7 +13,7 @@ export default function PortfolioGrid({ onInquire }: PortfolioGridProps) {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
-  const categories = ['All', 'Corporate', 'Wedding', 'Luxury', 'Brand'];
+  const categories = ['All', 'Corporate', 'Cultural & Theatre', 'Celebrations', 'Bespoke Keepsakes'];
 
   const filteredProjects = selectedCategory === 'All'
     ? PROJECTS
