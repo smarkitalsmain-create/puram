@@ -4,7 +4,7 @@ export const LEADERSHIP: TeamMember[] = [
   {
     id: 'karthika-venugopal',
     name: 'Karthika Venugopal',
-    role: 'Co-Founder & Creative Director',
+    role: 'Founder & Creative Director',
     image: '/team/karthika-venugopal.jpg',
     bio: [
       'With a professional background in architecture and interior design, Karthika Venugopal knows how to transform an ordinary space into an immersive experience. Her instinct for detail, proportion, colour and storytelling allows her to envision an event as a complete world rather than a collection of decorations.',
