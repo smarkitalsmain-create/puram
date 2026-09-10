@@ -225,6 +225,72 @@ export const PROJECTS: Project[] = [
     galleryImages: [
       '/portfolio/bespoke-portrait/01-painting.jpg'
     ]
+  },
+  {
+    id: 'international-yoga-day-2025',
+    title: '11th International Yoga Day',
+    category: 'Corporate',
+    image: '/portfolio/yoga-day/01-stage-performance.jpg',
+    year: '2025',
+    location: 'IMS Ghaziabad (University Course Campus), Dasna',
+    client: 'Ghaziabad District Administration',
+    challenge: 'Stage a public government ceremony at sunrise for International Yoga Day — needing a dignified official backdrop alongside a classical dance performance, built to work for a large open-air audience.',
+    approach: 'A functional stage skirt of layered fresh-flower garlands framing the official banner and podium, giving the performers a bright, festive floor to work with while keeping the protocol elements front and centre.',
+    execution: 'Built the full-width marigold, gerbera and rose garland stage skirt and floral drape columns either side of the backdrop, coordinated for an early-morning 6:00–7:45 AM programme.',
+    result: 'A stage that read as celebratory and official at once, holding up for both the opening dance performance and the formal proceedings that followed.',
+    galleryImages: [
+      '/portfolio/yoga-day/01-stage-performance.jpg'
+    ]
+  },
+  {
+    id: 'mehndi-umbrella-decor',
+    title: 'Rajasthani Umbrella Mehndi & Haldi Décor',
+    category: 'Celebrations',
+    image: '/portfolio/mehndi-umbrella-decor/01-lawn-backdrop.jpg',
+    year: '2026',
+    location: 'India',
+    client: 'Private Clients',
+    challenge: 'Give mehndi and haldi functions a backdrop with real colour and craft to it, rather than a single plain drape — something guests would actually want photographed against.',
+    approach: 'Leaning fully into traditional Rajasthani umbrellas and jewel-toned drapery as the centerpiece, rather than treating them as a small accent.',
+    execution: 'Layered pink, purple and yellow drapes with hand-painted hanging umbrellas and mirrored diamond ornaments for a lawn ceremony, and a second entrance-style version built around a fresh floral ring with umbrellas for an indoor function.',
+    result: 'Two distinct takes on the same signature style — both delivering a backdrop that did the heavy lifting for photos on its own.',
+    galleryImages: [
+      '/portfolio/mehndi-umbrella-decor/01-lawn-backdrop.jpg',
+      '/portfolio/mehndi-umbrella-decor/02-entrance-backdrop.jpg'
+    ]
+  },
+  {
+    id: 'golden-hour-reception',
+    title: 'A Golden Hour Reception Backdrop',
+    category: 'Celebrations',
+    image: '/portfolio/golden-hour-reception/01-floral-arch.jpg',
+    year: '2026',
+    location: 'Private Venue, India',
+    client: 'Private Client',
+    challenge: 'Style a reception seating moment inside a heritage-style hall without fighting the room\'s existing gold panelling and statuary.',
+    approach: 'Work with the room\'s warm tones instead of against them — a lit floral ring and candle towers that read as an extension of the venue\'s own architecture.',
+    execution: 'A full round arch of pink, white and yellow roses wrapped in fairy lights around a tufted loveseat, flanked by tall LED candle towers and matching floral ground arrangements.',
+    result: 'A seating moment that felt built into the venue rather than dropped into it — soft, warm, and camera-ready from every angle.',
+    galleryImages: [
+      '/portfolio/golden-hour-reception/01-floral-arch.jpg'
+    ]
+  },
+  {
+    id: 'ammus-valakkapu',
+    title: 'Ammu\'s Valakkapu: A Kerala Baby Shower',
+    category: 'Celebrations',
+    image: '/portfolio/ammus-valakkapu/02-ceremony-collage.jpg',
+    year: '2026',
+    location: 'Private Residence, India',
+    client: 'Private Client',
+    challenge: 'Do justice to a traditional Kerala Valakkapu (bangle ceremony baby shower) — getting the rituals, the banana-leaf motifs and the marigold styling authentically right, not just "Indian-themed."',
+    approach: 'Build the ceremony around the real ritual elements — the nilavilakku (lamp), banana leaves, marigold garlands and flower-filled urulis — rather than generic balloon decor.',
+    execution: 'A welcome standee for the mother-to-be, a fully garlanded ritual seating area with lamp and offerings, marigold and jasmine strings framing a banana-leaf "Valakkapu" sign, and coordinated henna and floral styling for photos.',
+    result: 'A celebration that felt rooted in real Kerala tradition — exactly the kind of authentic regional styling families ask us for.',
+    galleryImages: [
+      '/portfolio/ammus-valakkapu/01-poster.jpg',
+      '/portfolio/ammus-valakkapu/02-ceremony-collage.jpg'
+    ]
   }
 ];
 
